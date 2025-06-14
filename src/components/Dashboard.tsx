@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
@@ -17,15 +16,15 @@ import {
   Heart,
   Award,
   Book,
-  Sparkles
 } from 'lucide-react';
 import JournalEntry from '@/components/JournalEntry';
 import MoodTracker from '@/components/MoodTracker';
 import RewardsPanel from '@/components/RewardsPanel';
-import AITools from '@/components/AITools';
+import MindMate from '@/components/MindMate';
 import { useAuth } from '@/hooks/useAuth';
 import LanguageSelector from '@/components/LanguageSelector';
 import ThemeToggle from '@/components/ThemeToggle';
+import { Sparkles } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const { t } = useTranslation();
@@ -161,9 +160,9 @@ const Dashboard: React.FC = () => {
           <TabsList className="grid w-full grid-cols-5 bg-white/50 backdrop-blur-sm dark:bg-gray-900/50">
             <TabsTrigger value="journal">{t('journal')}</TabsTrigger>
             <TabsTrigger value="mood">{t('mood')}</TabsTrigger>
-            <TabsTrigger value="ai-tools">
-              <Sparkles className="w-4 h-4 mr-1" />
-              AI Tools
+            <TabsTrigger value="mindmate">
+              <Brain className="w-4 h-4 mr-1" />
+              MindMate
             </TabsTrigger>
             <TabsTrigger value="rewards">{t('rewards')}</TabsTrigger>
             <TabsTrigger value="community">{t('community')}</TabsTrigger>
@@ -193,8 +192,8 @@ const Dashboard: React.FC = () => {
             />
           </TabsContent>
 
-          <TabsContent value="ai-tools">
-            <AITools />
+          <TabsContent value="mindmate">
+            <MindMate />
           </TabsContent>
 
           <TabsContent value="rewards">
