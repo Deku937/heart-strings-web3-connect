@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -34,9 +35,13 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 dark:from-purple-950 dark:via-blue-950 dark:to-indigo-950">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 dark:from-purple-950 dark:via-blue-950 dark:to-indigo-950 relative overflow-hidden">
+      {/* Decorative bars with same gradient as login button */}
+      <div className="absolute top-16 left-0 right-0 h-12 bg-gradient-to-r from-purple-600 to-blue-600 opacity-20 transform -skew-y-1"></div>
+      <div className="absolute top-28 left-0 right-0 h-8 bg-gradient-to-r from-purple-600 to-blue-600 opacity-15 transform skew-y-1"></div>
+      
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="text-center mb-16">
           {/* Header with controls */}
           <div className="flex justify-end items-center mb-8 space-x-2">
