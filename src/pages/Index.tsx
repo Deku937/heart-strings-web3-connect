@@ -1,10 +1,9 @@
-
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Shield, Coins, Users, Calendar, Trophy, Wallet } from 'lucide-react';
+import { Brain, Shield, Coins, Users, Calendar, Trophy, Wallet, LogIn, UserPlus } from 'lucide-react';
 import Dashboard from '@/components/Dashboard';
 import { useAuth } from '@/hooks/useAuth';
 import LanguageSelector from '@/components/LanguageSelector';
@@ -40,7 +39,23 @@ const Index = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           {/* Header with controls */}
-          <div className="flex justify-end mb-8 space-x-2">
+          <div className="flex justify-end items-center mb-8 space-x-2">
+            <Button 
+              onClick={() => navigate('/auth')}
+              variant="outline" 
+              size="sm"
+            >
+              <LogIn className="mr-2 h-4 w-4" />
+              {t('login')}
+            </Button>
+            <Button 
+              onClick={() => navigate('/auth')}
+              variant="outline" 
+              size="sm"
+            >
+              <UserPlus className="mr-2 h-4 w-4" />
+              {t('signup')}
+            </Button>
             <LanguageSelector />
             <ThemeToggle />
           </div>
