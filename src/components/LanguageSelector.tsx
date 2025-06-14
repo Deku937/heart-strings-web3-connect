@@ -1,4 +1,5 @@
 
+
 import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import {
@@ -26,7 +27,10 @@ const LanguageSelector = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button 
+          size="sm"
+          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0"
+        >
           <Globe className="h-4 w-4 mr-2" />
           {currentLanguage.flag} {currentLanguage.name}
         </Button>
@@ -48,3 +52,4 @@ const LanguageSelector = () => {
 };
 
 export default LanguageSelector;
+

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -47,16 +46,16 @@ const Index = () => {
           <div className="flex justify-end items-center mb-8 space-x-2">
             <Button 
               onClick={() => navigate('/auth')}
-              variant="outline" 
               size="sm"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0"
             >
               <LogIn className="mr-2 h-4 w-4" />
               {t('login')}
             </Button>
             <Button 
               onClick={() => navigate('/auth')}
-              variant="outline" 
               size="sm"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0"
             >
               <UserPlus className="mr-2 h-4 w-4" />
               {t('signup')}
