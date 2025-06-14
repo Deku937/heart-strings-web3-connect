@@ -145,13 +145,13 @@ const Dashboard: React.FC = () => {
           <CardContent>
             <Progress value={weeklyProgress} className="w-full" />
             <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-2">
-              <span>Lundi</span>
-              <span>Mardi</span>
-              <span>Mercredi</span>
-              <span>Jeudi</span>
-              <span>Vendredi</span>
-              <span>Samedi</span>
-              <span>Dimanche</span>
+              <span>Monday</span>
+              <span>Tuesday</span>
+              <span>Wednesday</span>
+              <span>Thursday</span>
+              <span>Friday</span>
+              <span>Saturday</span>
+              <span>Sunday</span>
             </div>
           </CardContent>
         </Card>
@@ -163,7 +163,7 @@ const Dashboard: React.FC = () => {
             <TabsTrigger value="mood">{t('mood')}</TabsTrigger>
             <TabsTrigger value="ai-tools">
               <Sparkles className="w-4 h-4 mr-1" />
-              Outils IA
+              AI Tools
             </TabsTrigger>
             <TabsTrigger value="rewards">{t('rewards')}</TabsTrigger>
             <TabsTrigger value="community">{t('community')}</TabsTrigger>
@@ -206,23 +206,23 @@ const Dashboard: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Users className="w-5 h-5 mr-2 text-purple-600" />
-                  {t('community')} MindChain
+                  MindChain {t('community')}
                 </CardTitle>
                 <CardDescription className="dark:text-gray-300">
-                  Connectez-vous avec d'autres membres de manière anonyme et bienveillante
+                  Connect with other members anonymously and supportively
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-12">
                   <Users className="w-16 h-16 mx-auto text-purple-300 mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Bientôt disponible</h3>
+                  <h3 className="text-xl font-semibold mb-2">Coming Soon</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    La fonctionnalité communauté sera lancée prochainement. 
-                    Restez connecté pour partager votre parcours avec d'autres.
+                    The community feature will be launched soon. 
+                    Stay connected to share your journey with others.
                   </p>
                   <Button disabled>
                     <Plus className="w-4 h-4 mr-2" />
-                    Rejoindre la communauté
+                    Join Community
                   </Button>
                 </div>
               </CardContent>

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,6 +19,7 @@ interface JournalEntryProps {
 }
 
 const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
+  const { t } = useTranslation();
   const [entry, setEntry] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -25,8 +27,8 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
   const handleSubmit = async () => {
     if (!entry.trim()) {
       toast({
-        title: "Entrée vide",
-        description: "Veuillez écrire quelque chose avant de sauvegarder.",
+        title: "Empty Entry",
+        description: "Please write something before saving.",
         variant: "destructive",
       });
       return;
@@ -41,24 +43,24 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
       setIsSubmitting(false);
       
       toast({
-        title: "Entrée sauvegardée! 🎉",
-        description: "Votre journal a été sécurisé sur la blockchain. +10 MIND tokens gagnés!",
+        title: "Entry Saved! 🎉",
+        description: "Your journal has been secured on the blockchain. +10 MIND tokens earned!",
       });
     }, 2000);
   };
 
   const promptSuggestions = [
-    "Comment je me sens aujourd'hui...",
-    "Une chose pour laquelle je suis reconnaissant...",
-    "Mon plus grand défi aujourd'hui...",
-    "Une victoire personnelle récente...",
-    "Ce que j'aimerais améliorer..."
+    "How I feel today...",
+    "Something I'm grateful for...",
+    "My biggest challenge today...",
+    "A recent personal victory...",
+    "What I'd like to improve..."
   ];
 
   return (
     <div className="space-y-6">
       {/* Today's Entry Card */}
-      <Card className="border-0 bg-white/70 backdrop-blur-sm">
+      <Card className="border-0 bg-white/70 backdrop-blur-sm dark:bg-gray-900/70">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -66,10 +68,10 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
                 <Book className="w-5 h-5 text-white" />
               </div>
               <div>
-                <CardTitle>Journal d'aujourd'hui</CardTitle>
+                <CardTitle>{t('todays_journal')}</CardTitle>
                 <CardDescription className="flex items-center mt-1">
                   <Calendar className="w-4 h-4 mr-1" />
-                  {new Date().toLocaleDateString('fr-FR', { 
+                  {new Date().toLocaleDateString('en-US', { 
                     weekday: 'long', 
                     year: 'numeric', 
                     month: 'long', 
@@ -78,23 +80,23 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
                 </CardDescription>
               </div>
             </div>
-            <Badge variant="secondary" className="bg-green-100 text-green-800">
+            <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100">
               <Lock className="w-3 h-3 mr-1" />
-              Crypté
+              {t('encrypted')}
             </Badge>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <Textarea
-            placeholder="Exprimez vos pensées, émotions, et réflexions en toute sécurité..."
+            placeholder={t('journal_placeholder')}
             value={entry}
             onChange={(e) => setEntry(e.target.value)}
-            className="min-h-[200px] resize-none border-purple-200 focus:border-purple-400"
+            className="min-h-[200px] resize-none border-purple-200 focus:border-purple-400 dark:border-purple-800 dark:focus:border-purple-600"
           />
           
           <div className="flex justify-between items-center">
-            <div className="text-sm text-gray-500">
-              {entry.length > 0 && `${entry.length} caractères`}
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              {entry.length > 0 && `${entry.length} characters`}
             </div>
             <Button 
               onClick={handleSubmit} 
@@ -104,12 +106,12 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
               {isSubmitting ? (
                 <>
                   <Sparkles className="w-4 h-4 mr-2 animate-spin" />
-                  Sauvegarde sécurisée...
+                  {t('saving')}
                 </>
               ) : (
                 <>
                   <Save className="w-4 h-4 mr-2" />
-                  Sauvegarder
+                  {t('save')}
                 </>
               )}
             </Button>
@@ -118,11 +120,11 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
       </Card>
 
       {/* Writing Prompts */}
-      <Card className="border-0 bg-white/70 backdrop-blur-sm">
+      <Card className="border-0 bg-white/70 backdrop-blur-sm dark:bg-gray-900/70">
         <CardHeader>
-          <CardTitle className="text-lg">Suggestions d'écriture</CardTitle>
-          <CardDescription>
-            Besoin d'inspiration ? Cliquez sur une suggestion pour commencer.
+          <CardTitle className="text-lg">{t('writing_suggestions')}</CardTitle>
+          <CardDescription className="dark:text-gray-300">
+            {t('writing_suggestions_desc')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -133,7 +135,7 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
                 variant="outline"
                 size="sm"
                 onClick={() => setEntry(prompt)}
-                className="text-left justify-start hover:bg-purple-50 hover:border-purple-300"
+                className="text-left justify-start hover:bg-purple-50 hover:border-purple-300 dark:hover:bg-purple-950 dark:hover:border-purple-700"
               >
                 {prompt}
               </Button>
@@ -143,14 +145,13 @@ const JournalEntry: React.FC<JournalEntryProps> = ({ onEntrySubmit }) => {
       </Card>
 
       {/* Privacy Notice */}
-      <Card className="border-0 bg-gradient-to-r from-purple-100 to-blue-100">
+      <Card className="border-0 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900">
         <CardContent className="p-4">
-          <div className="flex items-center space-x-3 text-sm text-purple-800">
+          <div className="flex items-center space-x-3 text-sm text-purple-800 dark:text-purple-100">
             <Lock className="w-5 h-5" />
             <div>
-              <p className="font-medium">100% Privé et Sécurisé</p>
-              <p>Vos entrées sont cryptées end-to-end et stockées de manière décentralisée. 
-                 Seul vous avez accès à vos données personnelles.</p>
+              <p className="font-medium">{t('privacy_notice')}</p>
+              <p>{t('privacy_notice_desc')}</p>
             </div>
           </div>
         </CardContent>
