@@ -16,11 +16,13 @@ import {
   Plus,
   Heart,
   Award,
-  Book
+  Book,
+  Sparkles
 } from 'lucide-react';
 import JournalEntry from '@/components/JournalEntry';
 import MoodTracker from '@/components/MoodTracker';
 import RewardsPanel from '@/components/RewardsPanel';
+import AITools from '@/components/AITools';
 import { useAuth } from '@/hooks/useAuth';
 import LanguageSelector from '@/components/LanguageSelector';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -156,9 +158,13 @@ const Dashboard: React.FC = () => {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="journal" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-white/50 backdrop-blur-sm dark:bg-gray-900/50">
+          <TabsList className="grid w-full grid-cols-5 bg-white/50 backdrop-blur-sm dark:bg-gray-900/50">
             <TabsTrigger value="journal">{t('journal')}</TabsTrigger>
             <TabsTrigger value="mood">{t('mood')}</TabsTrigger>
+            <TabsTrigger value="ai-tools">
+              <Sparkles className="w-4 h-4 mr-1" />
+              Outils IA
+            </TabsTrigger>
             <TabsTrigger value="rewards">{t('rewards')}</TabsTrigger>
             <TabsTrigger value="community">{t('community')}</TabsTrigger>
           </TabsList>
@@ -185,6 +191,10 @@ const Dashboard: React.FC = () => {
                 }));
               }}
             />
+          </TabsContent>
+
+          <TabsContent value="ai-tools">
+            <AITools />
           </TabsContent>
 
           <TabsContent value="rewards">
