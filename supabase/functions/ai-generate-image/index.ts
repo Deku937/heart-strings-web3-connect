@@ -22,6 +22,8 @@ serve(async (req) => {
       throw new Error('Prompt is required');
     }
 
+    console.log('Generating image with prompt:', prompt);
+
     const response = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
       headers: {
@@ -38,12 +40,15 @@ serve(async (req) => {
     });
 
     if (!response.ok) {
+      const errorData = await response.text();
+      console.error('OpenAI Image API error:', errorData);
       throw new Error(`OpenAI API error: ${response.statusText}`);
     }
 
     const data = await response.json();
     const imageUrl = data.data[0].url;
 
+    console.log('Image generated successfully');
     return new Response(JSON.stringify({ imageUrl }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

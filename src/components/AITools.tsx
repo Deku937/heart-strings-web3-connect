@@ -4,20 +4,19 @@ import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Brain, 
   Wand2, 
   Volume2, 
-  Mic,
   Sparkles,
   MessageSquare,
   Image,
   Loader2
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { supabase } from "@/integrations/supabase/client";
 
 const AITools: React.FC = () => {
   const { t } = useTranslation();
@@ -52,18 +51,12 @@ const AITools: React.FC = () => {
 
     setLoadingState('textGen', true);
     try {
-      const response = await fetch('/api/ai/generate-text', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: textPrompt }),
+      const { data, error } = await supabase.functions.invoke('ai-generate-text', {
+        body: { prompt: textPrompt },
       });
 
-      const data = await response.json();
-      
-      if (data.error) {
-        throw new Error(data.error);
+      if (error) {
+        throw new Error(error.message);
       }
 
       setGeneratedText(data.generatedText);
@@ -95,21 +88,15 @@ const AITools: React.FC = () => {
 
     setLoadingState('tts', true);
     try {
-      const response = await fetch('/api/ai/text-to-speech', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
+      const { data, error } = await supabase.functions.invoke('ai-text-to-speech', {
+        body: { 
           text: ttsText,
           voice: selectedVoice 
-        }),
+        },
       });
 
-      const data = await response.json();
-      
-      if (data.error) {
-        throw new Error(data.error);
+      if (error) {
+        throw new Error(error.message);
       }
 
       // Play the generated audio
@@ -149,18 +136,12 @@ const AITools: React.FC = () => {
 
     setLoadingState('imageGen', true);
     try {
-      const response = await fetch('/api/ai/generate-image', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: imagePrompt }),
+      const { data, error } = await supabase.functions.invoke('ai-generate-image', {
+        body: { prompt: imagePrompt },
       });
 
-      const data = await response.json();
-      
-      if (data.error) {
-        throw new Error(data.error);
+      if (error) {
+        throw new Error(error.message);
       }
 
       setGeneratedImage(data.imageUrl);
@@ -398,7 +379,7 @@ const AITools: React.FC = () => {
             <div className="flex items-center space-x-3">
               <Brain className="w-5 h-5 text-orange-600" />
               <div>
-                <p className="font-medium text-orange-900 dark:text-orange-100">IA Alimentée par OpenAI & ElevenLabs</p>
+                <p className="font-medium text-orange-900 dark:text-orange-100">IA Alimentée par OpenAI</p>
                 <p className="text-sm text-orange-700 dark:text-orange-300">
                   Technologie de pointe pour une expérience utilisateur exceptionnelle
                 </p>
