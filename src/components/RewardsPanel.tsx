@@ -27,32 +27,32 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
   const achievements = [
     {
       id: 1,
-      title: "Premier Pas",
-      description: "Première entrée de journal",
+      title: "First Step",
+      description: "First journal entry",
       icon: Star,
       unlocked: true,
       reward: 10
     },
     {
       id: 2,
-      title: "Persévérant",
-      description: "7 jours consécutifs",
+      title: "Perseverant",
+      description: "7 days in a row",
       icon: Target,
       unlocked: true,
       reward: 50
     },
     {
       id: 3,
-      title: "Écrivain Régulier",
-      description: "20 entrées de journal",
+      title: "Regular Writer",
+      description: "20 journal entries",
       icon: Heart,
       unlocked: true,
       reward: 100
     },
     {
       id: 4,
-      title: "Maître du Bien-être",
-      description: "30 jours consécutifs",
+      title: "Wellbeing Master",
+      description: "30 days in a row",
       icon: Crown,
       unlocked: false,
       reward: 200
@@ -62,24 +62,24 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
   const rewards = [
     {
       id: 1,
-      title: "Consultation avec un Pro",
-      description: "30 minutes avec un psychologue certifié",
+      title: "Consult with a Pro",
+      description: "30 minutes with a certified psychologist",
       cost: 500,
       icon: Zap,
       available: tokens >= 500
     },
     {
       id: 2,
-      title: "Ressources Premium",
-      description: "Accès aux guides de méditation avancés",
+      title: "Premium Resources",
+      description: "Access to advanced meditation guides",
       cost: 200,
       icon: Gift,
       available: tokens >= 200
     },
     {
       id: 3,
-      title: "Badge Personnalisé",
-      description: "Créez votre propre badge de profil",
+      title: "Custom Badge",
+      description: "Create your own profile badge",
       cost: 100,
       icon: Star,
       available: tokens >= 100
@@ -98,20 +98,20 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold">{tokens} MIND</h3>
-                <p className="text-yellow-100">Tokens disponibles</p>
+                <p className="text-yellow-100">Available tokens</p>
               </div>
             </div>
             <div className="text-center">
               <div className="bg-white/20 p-3 rounded-full">
                 <Trophy className="w-8 h-8" />
               </div>
-              <p className="text-sm mt-1">Niveau {level}</p>
+              <p className="text-sm mt-1">Level {level}</p>
             </div>
           </div>
           
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span>Progrès vers niveau {level + 1}</span>
+              <span>Progress to level {level + 1}</span>
               <span>{tokens % 100}/100</span>
             </div>
             <Progress value={progressToNextLevel} className="bg-white/20" />
@@ -124,10 +124,10 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
         <CardHeader>
           <CardTitle className="flex items-center">
             <Trophy className="w-5 h-5 mr-2 text-yellow-600" />
-            Accomplissements
+            Achievements
           </CardTitle>
           <CardDescription>
-            Débloquez des récompenses en atteignant vos objectifs
+            Unlock rewards by reaching your goals
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -157,7 +157,7 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
                     </div>
                   </div>
                   <Badge variant={achievement.unlocked ? "default" : "secondary"}>
-                    {achievement.unlocked ? "Débloqué" : `${achievement.reward} MIND`}
+                    {achievement.unlocked ? "Unlocked" : `${achievement.reward} MIND`}
                   </Badge>
                 </div>
               );
@@ -171,10 +171,10 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
         <CardHeader>
           <CardTitle className="flex items-center">
             <Gift className="w-5 h-5 mr-2 text-purple-600" />
-            Boutique de Récompenses
+            Rewards Shop
           </CardTitle>
           <CardDescription>
-            Échangez vos MIND tokens contre des récompenses exclusives
+            Exchange your MIND tokens for exclusive rewards
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -214,7 +214,7 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
                         "bg-purple-600 hover:bg-purple-700" : ""
                       }
                     >
-                      {reward.available ? "Échanger" : "Indisponible"}
+                      {reward.available ? "Redeem" : "Unavailable"}
                     </Button>
                   </div>
                 </div>

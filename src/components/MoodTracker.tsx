@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -21,22 +22,23 @@ interface MoodTrackerProps {
 }
 
 const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) => {
+  const { t } = useTranslation();
   const [selectedMood, setSelectedMood] = useState([currentMood]);
   const [note, setNote] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const moodLabels = {
-    1: { label: 'Très difficile', color: 'text-red-600', icon: Frown },
-    2: { label: 'Difficile', color: 'text-red-500', icon: Frown },
-    3: { label: 'Pas génial', color: 'text-orange-500', icon: Frown },
-    4: { label: 'Moyen-', color: 'text-orange-400', icon: Meh },
-    5: { label: 'Neutre', color: 'text-yellow-500', icon: Meh },
-    6: { label: 'Correct', color: 'text-yellow-400', icon: Meh },
-    7: { label: 'Bien', color: 'text-green-400', icon: Smile },
-    8: { label: 'Très bien', color: 'text-green-500', icon: Smile },
-    9: { label: 'Excellent', color: 'text-green-600', icon: Smile },
-    10: { label: 'Fantastique', color: 'text-green-700', icon: Smile }
+    1: { label: t("very_difficult"), color: 'text-red-600', icon: Frown },
+    2: { label: t("difficult"), color: 'text-red-500', icon: Frown },
+    3: { label: t("not_great"), color: 'text-orange-500', icon: Frown },
+    4: { label: t("below_average"), color: 'text-orange-400', icon: Meh },
+    5: { label: t("neutral"), color: 'text-yellow-500', icon: Meh },
+    6: { label: t("okay"), color: 'text-yellow-400', icon: Meh },
+    7: { label: t("good"), color: 'text-green-400', icon: Smile },
+    8: { label: t("very_good"), color: 'text-green-500', icon: Smile },
+    9: { label: t("excellent"), color: 'text-green-600', icon: Smile },
+    10: { label: t("fantastic"), color: 'text-green-700', icon: Smile }
   };
 
   const currentMoodInfo = moodLabels[selectedMood[0] as keyof typeof moodLabels];
@@ -49,22 +51,21 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
     setTimeout(() => {
       onMoodUpdate(selectedMood[0]);
       setIsSubmitting(false);
-      
       toast({
-        title: "Humeur enregistrée! 💚",
-        description: `Votre humeur (${selectedMood[0]}/10) a été sauvegardée. +5 MIND tokens gagnés!`,
+        title: t('mood_saved'),
+        description: t('mood_saved_desc', { rating: selectedMood[0] }),
       });
     }, 1500);
   };
 
   const weeklyMoodData = [
-    { day: 'Lun', mood: 7 },
-    { day: 'Mar', mood: 6 },
-    { day: 'Mer', mood: 8 },
-    { day: 'Jeu', mood: 7 },
-    { day: 'Ven', mood: 9 },
-    { day: 'Sam', mood: 8 },
-    { day: 'Dim', mood: selectedMood[0] }
+    { day: t('days', { context: 'short', returnObjects: true })[0] || 'Mon', mood: 7 },
+    { day: t('days', { context: 'short', returnObjects: true })[1] || 'Tue', mood: 6 },
+    { day: t('days', { context: 'short', returnObjects: true })[2] || 'Wed', mood: 8 },
+    { day: t('days', { context: 'short', returnObjects: true })[3] || 'Thu', mood: 7 },
+    { day: t('days', { context: 'short', returnObjects: true })[4] || 'Fri', mood: 9 },
+    { day: t('days', { context: 'short', returnObjects: true })[5] || 'Sat', mood: 8 },
+    { day: t('days', { context: 'short', returnObjects: true })[6] || 'Sun', mood: selectedMood[0] }
   ];
 
   return (
@@ -78,10 +79,10 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
                 <Heart className="w-5 h-5 text-white" />
               </div>
               <div>
-                <CardTitle>Comment vous sentez-vous ?</CardTitle>
+                <CardTitle>{t('how_do_you_feel')}</CardTitle>
                 <CardDescription className="flex items-center mt-1">
                   <Calendar className="w-4 h-4 mr-1" />
-                  {new Date().toLocaleDateString('fr-FR', { 
+                  {new Date().toLocaleDateString('en-US', { 
                     weekday: 'long', 
                     day: 'numeric',
                     month: 'long'
@@ -90,7 +91,7 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
               </div>
             </div>
             <Badge variant="secondary" className="bg-pink-100 text-pink-800">
-              Suivi quotidien
+              {t('daily_tracking')}
             </Badge>
           </div>
         </CardHeader>
@@ -117,8 +118,8 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
                 className="w-full"
               />
               <div className="flex justify-between text-sm text-gray-500 mt-2">
-                <span>1 - Très difficile</span>
-                <span>10 - Fantastique</span>
+                <span>1 - {t('very_difficult')}</span>
+                <span>10 - {t('fantastic')}</span>
               </div>
             </div>
           </div>
@@ -131,12 +132,12 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
             {isSubmitting ? (
               <>
                 <Heart className="w-4 h-4 mr-2 animate-pulse" />
-                Enregistrement...
+                {t('saving')}
               </>
             ) : (
               <>
                 <Save className="w-4 h-4 mr-2" />
-                Enregistrer mon humeur
+                {t('save_mood')}
               </>
             )}
           </Button>
@@ -148,10 +149,10 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
         <CardHeader>
           <CardTitle className="flex items-center">
             <TrendingUp className="w-5 h-5 mr-2 text-purple-600" />
-            Tendance de la semaine
+            {t('weekly_trend')}
           </CardTitle>
           <CardDescription>
-            Votre humeur au cours des 7 derniers jours
+            {t('weekly_trend_desc')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -177,19 +178,19 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
             <div className="flex justify-center space-x-4 text-xs">
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-green-500 rounded mr-1"></div>
-                <span>Bien (8-10)</span>
+                <span>{t('good')} (8-10)</span>
               </div>
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-yellow-500 rounded mr-1"></div>
-                <span>Moyen (6-7)</span>
+                <span>{t('okay')} (6-7)</span>
               </div>
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-orange-500 rounded mr-1"></div>
-                <span>Difficile (4-5)</span>
+                <span>{t('difficult')} (4-5)</span>
               </div>
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-red-500 rounded mr-1"></div>
-                <span>Très difficile (1-3)</span>
+                <span>{t('very_difficult')} (1-3)</span>
               </div>
             </div>
           </div>
@@ -200,3 +201,4 @@ const MoodTracker: React.FC<MoodTrackerProps> = ({ currentMood, onMoodUpdate }) 
 };
 
 export default MoodTracker;
+

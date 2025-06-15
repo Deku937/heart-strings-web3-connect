@@ -94,7 +94,7 @@ const MindMate: React.FC = () => {
       setRecordedChunks([]);
     } catch (error) {
       toast({
-        title: "Microphone Error",
+        title: "Microphone error",
         description: "Could not access microphone. Please check permissions.",
         variant: "destructive",
       });
@@ -167,7 +167,7 @@ const MindMate: React.FC = () => {
 
         if (imageError) throw imageError;
 
-        addMessage('assistant', 'I\'ve created a calming image for you based on your request:', 'image', undefined, imageData.imageUrl);
+        addMessage('assistant', "I've created a calming image for you based on your request:", 'image', undefined, imageData.imageUrl);
       } else {
         // Generate text response
         const { data, error } = await supabase.functions.invoke('ai-generate-text', {
