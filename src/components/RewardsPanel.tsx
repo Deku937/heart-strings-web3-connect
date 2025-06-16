@@ -120,13 +120,13 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
       </Card>
 
       {/* Achievements */}
-      <Card className="border-0 bg-white/70 backdrop-blur-sm">
+      <Card className="border-0 bg-gradient-to-r from-blue-800 to-blue-900 text-white">
         <CardHeader>
-          <CardTitle className="flex items-center">
-            <Trophy className="w-5 h-5 mr-2 text-yellow-600" />
+          <CardTitle className="flex items-center text-white">
+            <Trophy className="w-5 h-5 mr-2 text-yellow-400" />
             Achievements
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-blue-100">
             Unlock rewards by reaching your goals
           </CardDescription>
         </CardHeader>
@@ -139,24 +139,24 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
                   key={achievement.id}
                   className={`flex items-center justify-between p-4 rounded-lg border ${
                     achievement.unlocked 
-                      ? 'bg-green-50 border-green-200' 
-                      : 'bg-gray-50 border-gray-200 opacity-60'
+                      ? 'bg-blue-700/50 border-blue-500' 
+                      : 'bg-blue-900/30 border-blue-700 opacity-60'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <div className={`p-2 rounded-lg ${
                       achievement.unlocked 
                         ? 'bg-green-500 text-white' 
-                        : 'bg-gray-300 text-gray-500'
+                        : 'bg-blue-600 text-blue-300'
                     }`}>
                       <IconComponent className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-medium">{achievement.title}</h4>
-                      <p className="text-sm text-gray-600">{achievement.description}</p>
+                      <h4 className="font-medium text-white">{achievement.title}</h4>
+                      <p className="text-sm text-blue-200">{achievement.description}</p>
                     </div>
                   </div>
-                  <Badge variant={achievement.unlocked ? "default" : "secondary"}>
+                  <Badge variant={achievement.unlocked ? "default" : "secondary"} className={achievement.unlocked ? "bg-green-600 text-white" : "bg-blue-700 text-blue-200"}>
                     {achievement.unlocked ? "Unlocked" : `${achievement.reward} MIND`}
                   </Badge>
                 </div>
@@ -167,13 +167,13 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
       </Card>
 
       {/* Reward Shop */}
-      <Card className="border-0 bg-white/70 backdrop-blur-sm">
+      <Card className="border-0 bg-gradient-to-r from-blue-800 to-blue-900 text-white">
         <CardHeader>
-          <CardTitle className="flex items-center">
-            <Gift className="w-5 h-5 mr-2 text-purple-600" />
+          <CardTitle className="flex items-center text-white">
+            <Gift className="w-5 h-5 mr-2 text-purple-400" />
             Rewards Shop
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-blue-100">
             Exchange your MIND tokens for exclusive rewards
           </CardDescription>
         </CardHeader>
@@ -186,32 +186,32 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ tokens, level }) => {
                   key={reward.id}
                   className={`flex items-center justify-between p-4 rounded-lg border ${
                     reward.available 
-                      ? 'bg-purple-50 border-purple-200' 
-                      : 'bg-gray-50 border-gray-200'
+                      ? 'bg-blue-700/50 border-blue-500' 
+                      : 'bg-blue-900/30 border-blue-700'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <div className={`p-2 rounded-lg ${
                       reward.available 
                         ? 'bg-purple-500 text-white' 
-                        : 'bg-gray-300 text-gray-500'
+                        : 'bg-blue-600 text-blue-300'
                     }`}>
                       <IconComponent className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-medium">{reward.title}</h4>
-                      <p className="text-sm text-gray-600">{reward.description}</p>
+                      <h4 className="font-medium text-white">{reward.title}</h4>
+                      <p className="text-sm text-blue-200">{reward.description}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Badge variant="outline">
+                    <Badge variant="outline" className="border-blue-400 text-blue-100">
                       {reward.cost} MIND
                     </Badge>
                     <Button 
                       size="sm" 
                       disabled={!reward.available}
                       className={reward.available ? 
-                        "bg-purple-600 hover:bg-purple-700" : ""
+                        "bg-purple-600 hover:bg-purple-700 text-white" : "bg-blue-700 text-blue-300"
                       }
                     >
                       {reward.available ? "Redeem" : "Unavailable"}
